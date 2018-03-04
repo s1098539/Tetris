@@ -1,15 +1,13 @@
 package com.example.lion.tetris.controler;
 
 import android.graphics.Point;
-import android.util.Log;
 
 import com.example.lion.tetris.activity.GameActivity;
 import com.example.lion.tetris.enumeration.GameSpot;
-import com.example.lion.tetris.model.CurrentGameValues;
 import com.example.lion.tetris.model.GameField;
 import com.example.lion.tetris.model.Tetraminos;
 
-import static com.example.lion.tetris.enumeration.GameSpot.*;
+import static com.example.lion.tetris.enumeration.GameSpot.clear;
 
 /**
  * Created by lion on 16/02/2018.

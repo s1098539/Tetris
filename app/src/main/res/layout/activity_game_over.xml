@@ -7,19 +7,69 @@
     android:background="@drawable/background_menu"
     tools:context="com.example.lion.tetris.activity.GameOverActivity">
 
+    <Button
+        android:id="@+id/buttonToMenu"
+        style="@android:style/Widget.Holo.Button.Inset"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="235dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="73dp"
+        android:elevation="0dp"
+        android:fontFamily="@font/ka1"
+        android:text="@string/back_to_menu"
+        android:textColor="@color/text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
+
     <TextView
         android:id="@+id/gameOverText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="385dp"
+        android:layout_marginBottom="73dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="164dp"
         android:fontFamily="@font/ka1"
-        android:text="gameOverText"
+        android:text="@string/game_over"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonToMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLevel"
+        android:layout_width="96dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/ka1"
+        android:text="level 25"
+        app:layout_constraintBottom_toTopOf="@+id/buttonToMenu"
+        app:layout_constraintEnd_toStartOf="@+id/textViewScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
+
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="116dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/ka1"
+        android:text="score 24230"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/buttonToMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewLevel"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
 </android.support.constraint.ConstraintLayout>

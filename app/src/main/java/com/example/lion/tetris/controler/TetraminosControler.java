@@ -5,9 +5,16 @@ import android.graphics.Point;
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.enumeration.TetraShape;
 import com.example.lion.tetris.model.Tetraminos;
+
 import java.util.Random;
 
-import static com.example.lion.tetris.enumeration.TetraShape.*;
+import static com.example.lion.tetris.enumeration.TetraShape.I;
+import static com.example.lion.tetris.enumeration.TetraShape.J;
+import static com.example.lion.tetris.enumeration.TetraShape.L;
+import static com.example.lion.tetris.enumeration.TetraShape.O;
+import static com.example.lion.tetris.enumeration.TetraShape.S;
+import static com.example.lion.tetris.enumeration.TetraShape.T;
+import static com.example.lion.tetris.enumeration.TetraShape.Z;
 
 /**
  * Created by lion on 16/02/2018.

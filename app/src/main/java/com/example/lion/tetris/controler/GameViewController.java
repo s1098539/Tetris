@@ -1,14 +1,12 @@
 package com.example.lion.tetris.controler;
 
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.view.SurfaceHolder;
-import android.widget.TextView;
 
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.activity.GameActivity;
@@ -24,17 +22,24 @@ public class GameViewController {
     Canvas canvas;
     GameView gameView;
     GameField gameField;
-    Paint paint = new Paint();
-    TextPaint textPaint = new TextPaint();
+    TextPaint textPaint;
     CurrentGameValuesController currentGameValuesController;
     GameActivity gameActivity;
-    int pxLeft;
-    int pxRight;
-    int pxTop;
-    int pxBottom;
-    int blockSize;
+    int pxLeft, pxRight, pxTop, pxBottom, blockSize;
+    Typeface typeface;
 
     public GameViewController() {
+    }
+
+    private void setTextPaint() {
+        if (textPaint == null) {
+            textPaint = new TextPaint();
+            textPaint.setTextSize(50);
+            textPaint.setColor(ContextCompat.getColor(gameActivity, R.color.text));
+            typeface = Typeface.createFromAsset(gameActivity.getAssets(), "font/ka1.ttf");
+            textPaint.setTypeface(typeface);
+            textPaint.setTextAlign(Paint.Align.LEFT);
+        }
     }
 
     public void calculateViewCoordinates() {
@@ -54,12 +59,11 @@ public class GameViewController {
 
     public int getHeightPixels() {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
-
     }
-
 
     public void draw(SurfaceHolder surfaceHolder) {
         canvas = surfaceHolder.lockCanvas();
+        setTextPaint();
         if (canvas != null) {
             canvas.drawBitmap(gameView.background, 0, 0, null);
 
@@ -74,20 +78,17 @@ public class GameViewController {
                     }
                 }
             }
-            textPaint.setTextSize(60);
-            textPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL));
-            textPaint.setTextAlign(Paint.Align.LEFT);
             canvas.drawText(currentGameValuesController.getScore(), blockSize * 7, pxTop - blockSize * 0.1f , textPaint);
-            textPaint.setTypeface(Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL));
             canvas.drawText(currentGameValuesController.getLevel(), blockSize * 2.1f, pxTop - blockSize * 0.1f, textPaint);
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
 
     }
 
-    public void set(GameView gameView, GameField gameField, CurrentGameValuesController currentGameValuesController) {
+    public void set(GameView gameView, GameField gameField, CurrentGameValuesController currentGameValuesController, GameActivity gameActivity) {
         this.gameView = gameView;
         this.gameField = gameField;
         this.currentGameValuesController = currentGameValuesController;
+        this.gameActivity = gameActivity;
     }
 }

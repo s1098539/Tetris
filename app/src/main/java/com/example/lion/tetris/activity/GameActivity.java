@@ -52,7 +52,6 @@ public class GameActivity extends AppCompatActivity {
         surfaceHolder = gameView.getHolder();
         surfaceHolder.addCallback(gameView);
 
-
         gameFieldControler.newEmptyGameField();
 
         tetraminosControler.newRandomTetraminos();
@@ -60,11 +59,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void hideSystemBars() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     @Override
@@ -108,20 +103,24 @@ public class GameActivity extends AppCompatActivity {
         tetraminos = new Tetraminos();
         gameField = new GameField();
         currentGameValues = new CurrentGameValues();
-
     }
 
     private void setControllers() {
         gameView.set(gameViewController, this);
         tetraminosControler.set(gameFieldControler, tetraminos);
         gameFieldControler.set(tetraminosControler, gameField, tetraminos, currentGameValuesController, this);
-        gameViewController.set(gameView, gameField, currentGameValuesController);
+        gameViewController.set(gameView, gameField, currentGameValuesController, this);
         currentGameValuesController.set(currentGameValues);
     }
 
     public void gameOver() {
         running = false;
-        startActivity(new Intent(GameActivity.this, GameOverActivity.class));
+        Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+        Bundle b = new Bundle();
+        b.putString("level", currentGameValuesController.getLevel());
+        b.putString("score", currentGameValuesController.getScore());
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
     private void rotate() {

@@ -17,13 +17,7 @@ import com.example.lion.tetris.controler.GameViewController;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     Resources resources;
-    private Bitmap blue;
-    private Bitmap cyan;
-    private Bitmap green;
-    private Bitmap magenta;
-    private Bitmap orange;
-    private Bitmap red;
-    private Bitmap yellow;
+    private Bitmap blue, cyan, green, magenta, orange, red, yellow;
     public Bitmap background;
     public Bitmap[] bitmaps;
     public int[] drawables;
@@ -31,8 +25,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     private GameActivity gameActivity;
     private int blockSize;
     private boolean created = false;
-
-
 
 
     public GameView(Context context, Resources resources) {
