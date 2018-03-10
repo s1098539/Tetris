@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context="com.example.lion.tetris.activity.GameActivity">
+    tools:context="com.example.lion.tetris.activity.game.GameActivity">
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.lion.tetris.activity;
+package com.example.lion.tetris.activity.game;
 
 import android.content.Context;
 import android.content.res.Resources;

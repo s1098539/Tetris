@@ -9,8 +9,8 @@ import android.text.TextPaint;
 import android.view.SurfaceHolder;
 
 import com.example.lion.tetris.R;
-import com.example.lion.tetris.activity.GameActivity;
-import com.example.lion.tetris.activity.GameView;
+import com.example.lion.tetris.activity.game.GameActivity;
+import com.example.lion.tetris.activity.game.GameView;
 import com.example.lion.tetris.model.GameField;
 
 /**

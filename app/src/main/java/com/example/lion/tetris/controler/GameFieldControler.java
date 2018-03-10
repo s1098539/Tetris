@@ -2,7 +2,7 @@ package com.example.lion.tetris.controler;
 
 import android.graphics.Point;
 
-import com.example.lion.tetris.activity.GameActivity;
+import com.example.lion.tetris.activity.game.GameActivity;
 import com.example.lion.tetris.enumeration.GameSpot;
 import com.example.lion.tetris.model.GameField;
 import com.example.lion.tetris.model.Tetraminos;
