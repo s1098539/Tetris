@@ -8,6 +8,8 @@
     <string name="menu_highscores">Highscores</string>
     <string name="menu_logout">logout</string>
     <string name="back_to_menu">Continue</string>
+    <string name="submit_score">Submit</string>
+    <string name="submit_name">Name</string>
 
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
@@ -38,6 +40,9 @@
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email to sent you password reset instructions.</string>
+
+    <string name="to_world_score">World</string>
+    <string name="to_local_score">Local</string>
 
     <!-- Strings related to Settings -->
 

@@ -42,7 +42,7 @@
         <activity
             android:name=".activity.HighscoresActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.login.ResetPasswordActivity"></activity>
+        <activity android:name=".activity.login.ResetPasswordActivity" />
     </application>
 
 </manifest>

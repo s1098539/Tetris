@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lion.tetris.activity.HighscoresActivity">
+    android:background="@drawable/background_menu"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.HighscoresActivity"
+    tools:showIn="@layout/activity_highscores">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/highscoreSwitchButton"
+        style="@android:style/Widget.Holo.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="249dp"
+        android:layout_marginTop="489dp"
+        android:fontFamily="@font/ka1"
+        android:text="@string/to_world_score"
+        android:textColor="@color/text" />
+
+</RelativeLayout>

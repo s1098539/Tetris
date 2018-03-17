@@ -7,6 +7,20 @@
     android:background="@drawable/background_menu"
     tools:context="com.example.lion.tetris.activity.game.GameOverActivity">
 
+    <EditText
+        android:id="@+id/submitName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="17dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/submit_name"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubmitScore" />
+
     <Button
         android:id="@+id/buttonToMenu"
         style="@android:style/Widget.Holo.Button.Inset"
@@ -25,6 +39,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
+
+    <Button
+        android:id="@+id/buttonSubmitScore"
+        style="@android:style/Widget.Holo.Button.Inset"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="79dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="34dp"
+        android:elevation="0dp"
+        android:fontFamily="@font/ka1"
+        android:text="@string/submit_score"
+        android:textColor="@color/text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonToMenu" />
 
     <TextView
         android:id="@+id/gameOverText"
@@ -72,4 +106,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewLevel"
         app:layout_constraintTop_toBottomOf="@+id/gameOverText" />
+
 </android.support.constraint.ConstraintLayout>
