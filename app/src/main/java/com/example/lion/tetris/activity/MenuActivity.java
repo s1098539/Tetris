@@ -54,13 +54,22 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+
+
         logout = (Button) findViewById(R.id.buttonLogout);
+        if (auth.getCurrentUser() == null) {
+            logout.setText(R.string.menu_login);
+        } else logout.setText(R.string.menu_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
-                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if (auth.getCurrentUser() != null) {
+                    auth.signOut();
+                    logout.setText(R.string.menu_login);
+                } else {
+                    Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

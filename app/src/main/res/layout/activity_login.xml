@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:fontFamily="@font/ka1"
-            android:text="@string/btn_login_guest"
+            android:text="@string/btn_back_to_menu"
             android:textAllCaps="false"
             android:textColor="@color/text"
             android:textSize="18sp" />

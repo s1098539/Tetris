@@ -62,6 +62,9 @@ public class HighscoresActivity extends AppCompatActivity {
         prepareWorldHighscoreData();
 
         highScoreSwitchButton = (Button) findViewById(R.id.highscoreSwitchButton);
+        if (auth.getCurrentUser() == null) {
+            highScoreSwitchButton.setVisibility(View.GONE);
+        } else highScoreSwitchButton.setVisibility(View.VISIBLE);
         highScoreSwitchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +112,7 @@ public class HighscoresActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     worldList.clear();
-                    for (DataSnapshot data: dataSnapshot.getChildren()) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
                         worldList.add(data.getValue(Highscore.class));
                     }
                     worldList = bubbleSort(worldList);
