@@ -38,6 +38,7 @@ public class HighscoresActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
+    Highscore header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class HighscoresActivity extends AppCompatActivity {
 
         localList = new ArrayList<>();
         worldList = new ArrayList<>();
+        header = new Highscore("Name", "Score", "Level", "Date");
 
         hAdapter = new HighscoreAdapter(localList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -89,6 +91,7 @@ public class HighscoresActivity extends AppCompatActivity {
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
         Cursor rs = dbHelper.query(DatabaseInfo.LocalHighscoreTables.LOCALHIGHSCORE, new String[]{"*"}, null, null, null, null, null);
         rs.moveToFirst();
+        localList.add(header);
         if (rs.getCount() > 0) {
             do {
                 name = (String) rs.getString(rs.getColumnIndex("name"));
@@ -100,7 +103,7 @@ public class HighscoresActivity extends AppCompatActivity {
             } while (rs.moveToNext());
         }
         rs.close();
-        localList = bubbleSort(localList);
+//        localList = bubbleSort(localList);
         hAdapter.notifyDataSetChanged();
     }
 
@@ -112,6 +115,7 @@ public class HighscoresActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     worldList.clear();
+                    worldList.add(header);
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         worldList.add(data.getValue(Highscore.class));
                     }
@@ -129,8 +133,8 @@ public class HighscoresActivity extends AppCompatActivity {
     private List<Highscore> bubbleSort(List<Highscore> list) {
         int n = list.size();
         Highscore temp;
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j < (n - i); j++) {
+        for (int i = 1; i < n; i++) {
+            for (int j = 2; j < (n - i); j++) {
                 if (Integer.valueOf(list.get(j - 1).getScore()) < Integer.valueOf(list.get(j).getScore())) {
                     temp = list.get(j - 1);
                     list.set(j - 1, list.get(j));
