@@ -11,19 +11,19 @@ import android.provider.BaseColumns;
  * Created by lion on 10/03/2018.
  */
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHighscoreHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
-    private static DatabaseHelper mInstance;
+    private static DatabaseHighscoreHelper mInstance;
     public static final String dbName = "TetrisLocalHighscores.db";
     public static final int dbVersion = 4;
 
-    private DatabaseHelper(Context ctx) {
+    private DatabaseHighscoreHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);
     }
 
-    public static synchronized DatabaseHelper getHelper(Context ctx) {
+    public static synchronized DatabaseHighscoreHelper getHelper(Context ctx) {
         if (mInstance == null) {
-            mInstance = new DatabaseHelper(ctx);
+            mInstance = new DatabaseHighscoreHelper(ctx);
             mSQLDB = mInstance.getWritableDatabase();
         }
         return mInstance;
@@ -31,22 +31,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DatabaseInfo.LocalHighscoreTables.LOCALHIGHSCORE + " (" +
+        db.execSQL("CREATE TABLE " + DatabaseHighscoreInfo.LocalHighscoreTables.LOCALHIGHSCORE + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                DatabaseInfo.LocalHighscoreColumn.NAME + " TEXT," +
-                DatabaseInfo.LocalHighscoreColumn.SCORE + " TEXT," +
-                DatabaseInfo.LocalHighscoreColumn.LEVEL + " TEXT," +
-                DatabaseInfo.LocalHighscoreColumn.DATE + " TEXT);"
+                DatabaseHighscoreInfo.LocalHighscoreColumn.NAME + " TEXT," +
+                DatabaseHighscoreInfo.LocalHighscoreColumn.SCORE + " TEXT," +
+                DatabaseHighscoreInfo.LocalHighscoreColumn.LEVEL + " TEXT," +
+                DatabaseHighscoreInfo.LocalHighscoreColumn.DATE + " TEXT);"
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseInfo.LocalHighscoreTables.LOCALHIGHSCORE);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseHighscoreInfo.LocalHighscoreTables.LOCALHIGHSCORE);
         onCreate(db);
     }
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DatabaseHighscoreHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

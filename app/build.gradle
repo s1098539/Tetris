@@ -6,8 +6,8 @@ android {
         applicationId "com.example.lion.tetris"
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 106004
-        versionName "1.6.004"
+        versionCode 107000
+        versionName "1.7.000"
         testInstrumentationRunner "android.support.draw.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,12 +28,21 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io"}
+    }
+}
+
 
 
 

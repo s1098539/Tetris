@@ -7,13 +7,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MotionEvent;
 
 import com.example.lion.tetris.R;
-import com.example.lion.tetris.database.DatabaseHelper;
-import com.example.lion.tetris.database.DatabaseInfo;
+import com.example.lion.tetris.database.DatabaseHighscoreHelper;
+import com.example.lion.tetris.database.DatabaseHighscoreInfo;
 import com.example.lion.tetris.highscore.Highscore;
 import com.example.lion.tetris.highscore.HighscoreAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,8 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -33,8 +29,9 @@ public class HighscoresActivity extends AppCompatActivity {
     private List<Highscore> localList, worldList;
     private RecyclerView recyclerView;
     private HighscoreAdapter hAdapter;
-    private Button highScoreSwitchButton;
     private boolean currentScreenLocal = true;
+    private float xStart;
+    static final int minSwipeDistance = 77;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -63,33 +60,42 @@ public class HighscoresActivity extends AppCompatActivity {
         prepareLocalHighscoreData();
         prepareWorldHighscoreData();
 
-        highScoreSwitchButton = (Button) findViewById(R.id.highscoreSwitchButton);
-        if (auth.getCurrentUser() == null) {
-            highScoreSwitchButton.setVisibility(View.GONE);
-        } else highScoreSwitchButton.setVisibility(View.VISIBLE);
-        highScoreSwitchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentScreenLocal) {
-                    hAdapter.setHighscoreList(worldList);
-                    highScoreSwitchButton.setText(R.string.to_local_score);
-                } else {
-                    hAdapter.setHighscoreList(localList);
-                    highScoreSwitchButton.setText(R.string.to_world_score);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                xStart = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                if (xStart - event.getX() > minSwipeDistance || event.getX() - xStart > minSwipeDistance) {
+                    swiped();
                 }
-                hAdapter.notifyDataSetChanged();
-                currentScreenLocal = !currentScreenLocal;
-            }
-        });
 
+        }
+        return super.onTouchEvent(event);
+    }
 
+    private void swiped() {
+        if (!currentScreenLocal) {
+            hAdapter.setHighscoreList(localList);
+            hAdapter.notifyDataSetChanged();
+            currentScreenLocal = !currentScreenLocal;
+        }
+        else if (auth.getCurrentUser() != null) {
+            hAdapter.setHighscoreList(worldList);
+            hAdapter.notifyDataSetChanged();
+            currentScreenLocal = !currentScreenLocal;
+        }
     }
 
     private void prepareLocalHighscoreData() {
         Highscore Highscore;
         String name, score, level, date;
-        DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
-        Cursor rs = dbHelper.query(DatabaseInfo.LocalHighscoreTables.LOCALHIGHSCORE, new String[]{"*"}, null, null, null, null, null);
+        DatabaseHighscoreHelper dbHelper = DatabaseHighscoreHelper.getHelper(this);
+        Cursor rs = dbHelper.query(DatabaseHighscoreInfo.LocalHighscoreTables.LOCALHIGHSCORE, new String[]{"*"}, null, null, null, null, null);
         rs.moveToFirst();
         localList.add(header);
         if (rs.getCount() > 0) {
@@ -103,7 +109,7 @@ public class HighscoresActivity extends AppCompatActivity {
             } while (rs.moveToNext());
         }
         rs.close();
-//        localList = bubbleSort(localList);
+        localList = bubbleSort(localList);
         hAdapter.notifyDataSetChanged();
     }
 

@@ -1,8 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<tools:RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/background_menu"
     tools:context="com.example.lion.tetris.activity.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+<com.github.mikephil.charting.charts.PieChart
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/chart" />
+
+    <TextView
+        android:id="@+id/iText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="I:"
+        android:textColor="@color/text" />
+        />
+
+    <EditText
+        android:id="@+id/iInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/iText" />
+
+    <TextView
+        android:id="@+id/jText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="J:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/iInput" />
+
+
+    <EditText
+        android:id="@+id/jInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/jText" />
+
+    <TextView
+        android:id="@+id/lText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="L:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/jInput" />
+
+    <EditText
+        android:id="@+id/lInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/lText" />
+
+    <TextView
+        android:id="@+id/oText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="O:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/lInput" />
+
+
+    <EditText
+        android:id="@+id/oInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/oText" />
+
+    <TextView
+        android:id="@+id/sText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="S:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/oInput" />
+
+
+    <EditText
+        android:id="@+id/sInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/sText" />
+
+    <TextView
+        android:id="@+id/tText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="T:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/sInput" />
+
+
+    <EditText
+        android:id="@+id/tInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/tText" />
+
+    <TextView
+        android:id="@+id/zText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Z:"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/tInput" />
+
+
+    <EditText
+        android:id="@+id/zInput"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:inputType="number"
+        android:textColor="@color/text"
+        android:layout_toEndOf="@id/zText" />
+
+    <Button
+        android:id="@+id/updateOddsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="56dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginRight="63dp"
+        android:text="@string/settings_submit_update" />
+
+
+
+</tools:RelativeLayout>

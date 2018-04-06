@@ -45,4 +45,6 @@
     <string name="to_world_score">World</string>
     <string name="to_local_score">Local</string>
 
+    <string name="settings_submit_update">Update</string>
+
 </resources>

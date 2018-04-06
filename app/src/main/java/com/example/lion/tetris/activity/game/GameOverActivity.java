@@ -2,11 +2,8 @@ package com.example.lion.tetris.activity.game;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +11,8 @@ import android.widget.TextView;
 
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.activity.MenuActivity;
-import com.example.lion.tetris.database.DatabaseHelper;
-import com.example.lion.tetris.database.DatabaseInfo;
+import com.example.lion.tetris.database.DatabaseHighscoreHelper;
+import com.example.lion.tetris.database.DatabaseHighscoreInfo;
 import com.example.lion.tetris.highscore.Highscore;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -120,14 +116,14 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     private void submitLocal() {
-        DatabaseHelper dbHelper = DatabaseHelper.getHelper(this);
+        DatabaseHighscoreHelper dbHelper = DatabaseHighscoreHelper.getHelper(this);
 
         ContentValues values = new ContentValues();
-        values.put(DatabaseInfo.LocalHighscoreColumn.NAME, highscore.getName());
-        values.put(DatabaseInfo.LocalHighscoreColumn.SCORE, highscore.getScore());
-        values.put(DatabaseInfo.LocalHighscoreColumn.LEVEL, highscore.getLevel());
-        values.put(DatabaseInfo.LocalHighscoreColumn.DATE, highscore.getDate());
+        values.put(DatabaseHighscoreInfo.LocalHighscoreColumn.NAME, highscore.getName());
+        values.put(DatabaseHighscoreInfo.LocalHighscoreColumn.SCORE, highscore.getScore());
+        values.put(DatabaseHighscoreInfo.LocalHighscoreColumn.LEVEL, highscore.getLevel());
+        values.put(DatabaseHighscoreInfo.LocalHighscoreColumn.DATE, highscore.getDate());
 
-        dbHelper.insert(DatabaseInfo.LocalHighscoreTables.LOCALHIGHSCORE, null, values);
+        dbHelper.insert(DatabaseHighscoreInfo.LocalHighscoreTables.LOCALHIGHSCORE, null, values);
     }
 }

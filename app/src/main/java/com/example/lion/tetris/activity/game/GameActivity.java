@@ -1,6 +1,7 @@
 package com.example.lion.tetris.activity.game;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -13,10 +14,14 @@ import com.example.lion.tetris.R;
 import com.example.lion.tetris.controler.CurrentGameValuesController;
 import com.example.lion.tetris.controler.GameFieldControler;
 import com.example.lion.tetris.controler.GameViewController;
+import com.example.lion.tetris.controler.SettingsController;
 import com.example.lion.tetris.controler.TetraminosControler;
+import com.example.lion.tetris.database.DatabaseSettingsHelper;
+import com.example.lion.tetris.database.DatabaseSettingsInfo;
 import com.example.lion.tetris.enumeration.GameSpot;
 import com.example.lion.tetris.model.CurrentGameValues;
 import com.example.lion.tetris.model.GameField;
+import com.example.lion.tetris.model.Settings;
 import com.example.lion.tetris.model.Tetraminos;
 
 public class GameActivity extends AppCompatActivity {
@@ -35,7 +40,9 @@ public class GameActivity extends AppCompatActivity {
     CurrentGameValues currentGameValues;
     Thread thread;
     Point points;
-    Boolean running = true, moved = false;
+    Settings settings;
+    SettingsController settingsController;
+    Boolean running = true, moved = false, pause = false;
     private float xStart, xCurrent, yStart, yEnd, deltaX, deltaY;
     static final int minSwipeDistance = 77;
 
@@ -44,6 +51,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initialise();
+        getLocalSettingsValues();
         setControllers();
 
         setContentView(R.layout.activity_game);
@@ -56,6 +64,37 @@ public class GameActivity extends AppCompatActivity {
 
         tetraminosControler.newRandomTetraminos();
         rotating = false;
+    }
+
+    public void getLocalSettingsValues() {
+        int i=10, j=10, l=10, o=10, s=10, t=10, z=10;
+        DatabaseSettingsHelper dbHelper = DatabaseSettingsHelper.getHelper(this);
+        Cursor rs = dbHelper.query(DatabaseSettingsInfo.LocalSettingsTables.LOCALSETTINGS, new String[]{"*"}, null, null, null, null, null);
+        rs.moveToFirst();
+        if (rs.getCount() > 0) {
+
+            i = Integer.parseInt(rs.getString(rs.getColumnIndex("I")));
+            j = Integer.parseInt((String) rs.getString(rs.getColumnIndex("J")));
+            l = Integer.parseInt((String) rs.getString(rs.getColumnIndex("L")));
+            o = Integer.parseInt((String) rs.getString(rs.getColumnIndex("O")));
+            s = Integer.parseInt((String) rs.getString(rs.getColumnIndex("S")));
+            t = Integer.parseInt((String) rs.getString(rs.getColumnIndex("T")));
+            z = Integer.parseInt((String) rs.getString(rs.getColumnIndex("Z")));
+        }
+        rs.close();
+        settings.setAll(i, j, l, o, s, t, z);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        pause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        unpause();
     }
 
     public void hideSystemBars() {
@@ -95,6 +134,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initialise() {
+        settings = new Settings();
         gameView = new GameView(this, getResources());
         tetraminosControler = new TetraminosControler();
         gameFieldControler = new GameFieldControler();
@@ -103,14 +143,16 @@ public class GameActivity extends AppCompatActivity {
         tetraminos = new Tetraminos();
         gameField = new GameField();
         currentGameValues = new CurrentGameValues();
+        settingsController = new SettingsController();
     }
 
     private void setControllers() {
         gameView.set(gameViewController, this);
-        tetraminosControler.set(gameFieldControler, tetraminos);
+        tetraminosControler.set(gameFieldControler, tetraminos, settingsController);
         gameFieldControler.set(tetraminosControler, gameField, tetraminos, currentGameValuesController, this);
         gameViewController.set(gameView, gameField, currentGameValuesController, this);
         currentGameValuesController.set(currentGameValues);
+        settingsController.set(settings);
     }
 
     public void gameOver() {
@@ -183,21 +225,32 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    public void pause() {
+        pause = true;
+    }
+
+    public void unpause() {
+        pause = false;
+    }
+
     public void startDropDownThread() {
         thread = new Thread() {
             @Override public void run() {
                 Boolean moved = false;
                 while (running) {
-                    try {
-                        Thread.sleep(currentGameValuesController.getGameSpeed());
-                        while (!moved) {
-                            if (!rotating) {
-                                moveDown();
-                                moved = true;
+                    if (!pause) {
+                        try {
+                            Thread.sleep(currentGameValuesController.getGameSpeed());
+                            while (!moved) {
+                                if (!rotating) {
+                                    moveDown();
+                                    moved = true;
+                                }
                             }
+                            moved = false;
+                        } catch (InterruptedException e) {
                         }
-                        moved = false;
-                    } catch ( InterruptedException e ) {}
+                    }
                 }
             }
 

@@ -4,7 +4,7 @@ package com.example.lion.tetris.database;
  * Created by lion on 10/03/2018.
  */
 
-public class DatabaseInfo {
+public class DatabaseHighscoreInfo {
 
     public class LocalHighscoreTables {
         public static final String LOCALHIGHSCORE = "localHighScore";
@@ -17,4 +17,3 @@ public class DatabaseInfo {
         public static final String DATE = "date";
     }
 }
-

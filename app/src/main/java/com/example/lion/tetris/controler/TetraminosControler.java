@@ -4,6 +4,7 @@ import android.graphics.Point;
 
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.enumeration.TetraShape;
+import com.example.lion.tetris.model.Settings;
 import com.example.lion.tetris.model.Tetraminos;
 
 import java.util.Random;
@@ -25,6 +26,7 @@ public class TetraminosControler {
     Random random;
     Tetraminos tetraminos;
     GameFieldControler gameFieldControler;
+    SettingsController settingsController;
 
     public TetraminosControler() {
     }
@@ -44,23 +46,23 @@ public class TetraminosControler {
 
     public void newRandomTetraminos() {
         random = new Random();
-        int randomShape = random.nextInt(7);
+        int randomShape = random.nextInt(settingsController.sumOfOdds());
         int randomDirection = random.nextInt(4);
         TetraShape shape;
-        switch (randomShape) {
-            case 0: shape = I;
-                break;
-            case 1: shape = J;
-                break;
-            case 2: shape = L;
-                break;
-            case 3: shape = O;
-                break;
-            case 4: shape = S;
-                break;
-            case 5: shape = T;
-                break;
-            default: shape = Z;
+        if (randomShape >= settingsController.rangeI()[0] && randomShape <= settingsController.rangeI()[1]) {
+            shape = I;
+        } else if (randomShape >= settingsController.rangeJ()[0] && randomShape <= settingsController.rangeJ()[1]) {
+            shape = J;
+        } else if (randomShape >= settingsController.rangeL()[0] && randomShape <= settingsController.rangeL()[1]) {
+            shape = L;
+        } else if (randomShape >= settingsController.rangeO()[0] && randomShape <= settingsController.rangeO()[1]) {
+            shape = O;
+        } else if (randomShape >= settingsController.rangeS()[0] && randomShape <= settingsController.rangeS()[1]) {
+            shape = S;
+        } else if (randomShape >= settingsController.rangeT()[0] && randomShape <= settingsController.rangeT()[1]) {
+            shape = T;
+        } else {
+            shape = Z;
         }
         newTetraminos(shape, randomDirection);
     }
@@ -280,8 +282,9 @@ public class TetraminosControler {
         tetraminos.setPoints(points);
     }
 
-    public void set(GameFieldControler gameFieldControler, Tetraminos tetraminos) {
+    public void set(GameFieldControler gameFieldControler, Tetraminos tetraminos, SettingsController settingsController) {
         this.gameFieldControler = gameFieldControler;
         this.tetraminos = tetraminos;
+        this.settingsController = settingsController;
     }
 }
