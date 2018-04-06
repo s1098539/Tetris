@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
+import android.widget.TextView;
 
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.database.DatabaseHighscoreHelper;
@@ -36,6 +37,7 @@ public class HighscoresActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     Highscore header;
+    TextView textHeader, textHeaderInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class HighscoresActivity extends AppCompatActivity {
         localList = new ArrayList<>();
         worldList = new ArrayList<>();
         header = new Highscore("Name", "Score", "Level", "Date");
+        textHeader = (TextView) findViewById(R.id.highscoreHeader);
+        textHeaderInfo = (TextView) findViewById(R.id.highscoreHeaderInfo);
 
         hAdapter = new HighscoreAdapter(localList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -59,6 +63,8 @@ public class HighscoresActivity extends AppCompatActivity {
 
         prepareLocalHighscoreData();
         prepareWorldHighscoreData();
+
+
 
     }
 
@@ -82,11 +88,15 @@ public class HighscoresActivity extends AppCompatActivity {
         if (!currentScreenLocal) {
             hAdapter.setHighscoreList(localList);
             hAdapter.notifyDataSetChanged();
+            textHeader.setText(R.string.highscore_header_local);
+            textHeaderInfo.setText(R.string.highscore_header_local_info);
             currentScreenLocal = !currentScreenLocal;
         }
         else if (auth.getCurrentUser() != null) {
             hAdapter.setHighscoreList(worldList);
             hAdapter.notifyDataSetChanged();
+            textHeader.setText(R.string.highscore_header_global);
+            textHeaderInfo.setText(R.string.highscore_header_global_info);
             currentScreenLocal = !currentScreenLocal;
         }
     }
@@ -139,7 +149,7 @@ public class HighscoresActivity extends AppCompatActivity {
     private List<Highscore> bubbleSort(List<Highscore> list) {
         int n = list.size();
         Highscore temp;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             for (int j = 2; j < (n - i); j++) {
                 if (Integer.valueOf(list.get(j - 1).getScore()) < Integer.valueOf(list.get(j).getScore())) {
                     temp = list.get(j - 1);

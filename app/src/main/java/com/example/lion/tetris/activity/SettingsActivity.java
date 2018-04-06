@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     private PieChart mChart;
     private Settings settings;
     private EditText i, j, l, o, s, t, z;
-    private Button updateButton;
+    private Button updateButton, resetButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         mChart = (PieChart) findViewById(R.id.chart);
         mChart.setDescription("");
+        mChart.setUsePercentValues(true);
+        mChart.setHoleRadius(32);
+        mChart.setTransparentCircleRadius(0);
+        mChart.setHoleColorTransparent(true);
         mChart.setTouchEnabled(true);
         mChart.setDrawSliceText(true);
         mChart.getLegend().setEnabled(true);
-        mChart.setTransparentCircleColor(Color.rgb(130, 130, 130));
-        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        mChart.animateY(900, Easing.EasingOption.EaseInOutQuad);
         settings = new Settings();
         getLocalSettingsValues();
         setInputValues();
@@ -53,6 +56,21 @@ public class SettingsActivity extends AppCompatActivity {
                 updateValuesFromInput();
             }
         });
+
+        resetButton = (Button) findViewById(R.id.resetOddsButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetOddsValues();
+                setInputValues();
+            }
+        });
+    }
+
+    private void resetOddsValues() {
+        settings.setAll(10, 10, 10, 10, 10, 10, 10);
+        submitLocal();
+        Log.e("am I working", "yes");
     }
 
     private void setInputValues() {

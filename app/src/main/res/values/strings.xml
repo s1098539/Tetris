@@ -46,5 +46,13 @@
     <string name="to_local_score">Local</string>
 
     <string name="settings_submit_update">Update</string>
+    <string name="settings_submit_reset">Reset</string>
+
+
+    <string name="highscore_header_local">Local highscores</string>
+    <string name="highscore_header_global">Global highscores</string>
+    <string name="highscore_header_local_info">swipe for global rankings</string>
+    <string name="highscore_header_global_info">swipe for local rankings</string>
+
 
 </resources>

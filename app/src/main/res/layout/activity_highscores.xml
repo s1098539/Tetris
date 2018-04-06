@@ -9,10 +9,32 @@
     tools:context=".activity.HighscoresActivity"
     tools:showIn="@layout/activity_highscores">
 
+    <TextView
+        android:id="@+id/highscoreHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ka1"
+        android:text="@string/highscore_header_local"
+        android:textColor="@color/text"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/highscoreHeaderInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ka1"
+        android:text="@string/highscore_header_local_info"
+        android:textColor="@color/text"
+        android:textSize="8sp"
+        android:layout_below="@id/highscoreHeader"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:layout_below="@id/highscoreHeaderInfo"/>
 
 </RelativeLayout>

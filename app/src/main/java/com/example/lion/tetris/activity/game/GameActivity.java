@@ -94,6 +94,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        hideSystemBars();
         unpause();
     }
 

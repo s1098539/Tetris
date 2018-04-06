@@ -161,15 +161,31 @@
 
     <Button
         android:id="@+id/updateOddsButton"
-        android:layout_width="wrap_content"
+        style="@android:style/Widget.Holo.Button.Inset"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="56dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginRight="63dp"
+        android:layout_marginRight="40dp"
+        android:fontFamily="@font/ka1"
+        android:textColor="@color/text"
         android:text="@string/settings_submit_update" />
+
+    <Button
+        android:id="@+id/resetOddsButton"
+        style="@android:style/Widget.Holo.Button.Inset"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="56dp"
+        android:layout_marginRight="252dp"
+        android:fontFamily="@font/ka1"
+        android:textColor="@color/text"
+        android:text="@string/settings_submit_reset" />
 
 
 
