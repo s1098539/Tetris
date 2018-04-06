@@ -49,17 +49,17 @@ public class TetraminosControler {
         int randomShape = random.nextInt(settingsController.sumOfOdds());
         int randomDirection = random.nextInt(4);
         TetraShape shape;
-        if (randomShape >= settingsController.rangeI()[0] && randomShape <= settingsController.rangeI()[1]) {
+        if (randomShape >= settingsController.range(I)[0] && randomShape <= settingsController.range(I)[1]) {
             shape = I;
-        } else if (randomShape >= settingsController.rangeJ()[0] && randomShape <= settingsController.rangeJ()[1]) {
+        } else if (randomShape >= settingsController.range(J)[0] && randomShape <= settingsController.range(J)[1]) {
             shape = J;
-        } else if (randomShape >= settingsController.rangeL()[0] && randomShape <= settingsController.rangeL()[1]) {
+        } else if (randomShape >= settingsController.range(L)[0] && randomShape <= settingsController.range(L)[1]) {
             shape = L;
-        } else if (randomShape >= settingsController.rangeO()[0] && randomShape <= settingsController.rangeO()[1]) {
+        } else if (randomShape >= settingsController.range(O)[0] && randomShape <= settingsController.range(O)[1]) {
             shape = O;
-        } else if (randomShape >= settingsController.rangeS()[0] && randomShape <= settingsController.rangeS()[1]) {
+        } else if (randomShape >= settingsController.range(S)[0] && randomShape <= settingsController.range(S)[1]) {
             shape = S;
-        } else if (randomShape >= settingsController.rangeT()[0] && randomShape <= settingsController.rangeT()[1]) {
+        } else if (randomShape >= settingsController.range(T)[0] && randomShape <= settingsController.range(T)[1]) {
             shape = T;
         } else {
             shape = Z;
