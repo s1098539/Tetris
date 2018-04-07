@@ -54,5 +54,7 @@
     <string name="highscore_header_local_info">swipe for global rankings</string>
     <string name="highscore_header_global_info">swipe for local rankings</string>
 
+    <string name="highscore_header_notloggedin_info">Login to see global rankings</string>
+
 
 </resources>

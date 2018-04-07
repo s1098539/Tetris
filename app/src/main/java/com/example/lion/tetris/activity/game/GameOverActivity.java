@@ -81,6 +81,12 @@ public class GameOverActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(GameOverActivity.this, MenuActivity.class);
+        startActivity(intent);
+    }
+
     private void createHighscore() {
         name = nameInput.getText().toString();
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());

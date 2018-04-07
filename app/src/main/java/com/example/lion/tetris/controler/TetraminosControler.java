@@ -133,7 +133,7 @@ public class TetraminosControler {
         int newX, newY;
         boolean valid = true;
         for (int i = 0; i<4; i++) {
-            newX = setupPoints[i].x+x;
+            newX = setupPoints[i].x+x-3;
             newY = setupPoints[i].y+y;
             if (newY<19) {
                 newPoints[i] = new Point(newX, newY);
@@ -148,15 +148,15 @@ public class TetraminosControler {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
             case 0:
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(3,1);
-                        points[2] = new Point(0,1);
-                        points[3] = new Point(1,1);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(6,1);
+                        points[2] = new Point(3,1);
+                        points[3] = new Point(4,1);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(2,2);
-                        points[2] = new Point(2,3);
-                        points[3] = new Point(2,0);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(5,2);
+                        points[2] = new Point(5,3);
+                        points[3] = new Point(5,0);
         }
         tetraminos.setPoints(points);
     }
@@ -164,25 +164,25 @@ public class TetraminosControler {
     private void setJPoints() {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
-            case 0:     points[0] = new Point(2,1);
-                        points[1] = new Point(1,1);
-                        points[2] = new Point(3,1);
-                        points[3] = new Point(3,2);
+            case 0:     points[0] = new Point(5,1);
+                        points[1] = new Point(4,1);
+                        points[2] = new Point(6,1);
+                        points[3] = new Point(6,2);
                     break;
-            case 1:     points[0] = new Point(2,1);
-                        points[1] = new Point(2,2);
-                        points[2] = new Point(2,0);
-                        points[3] = new Point(3,0);
+            case 1:     points[0] = new Point(5,1);
+                        points[1] = new Point(5,2);
+                        points[2] = new Point(5,0);
+                        points[3] = new Point(6,0);
                     break;
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(3,1);
-                        points[2] = new Point(1,1);
-                        points[3] = new Point(1,0);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(6,1);
+                        points[2] = new Point(4,1);
+                        points[3] = new Point(4,0);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(2,2);
-                        points[3] = new Point(1,2);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(5,2);
+                        points[3] = new Point(4,2);
         }
         tetraminos.setPoints(points);
     }
@@ -190,35 +190,35 @@ public class TetraminosControler {
     private void setLPoints() {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
-            case 0:     points[0] = new Point(2,1);
-                        points[1] = new Point(1,1);
-                        points[2] = new Point(3,1);
-                        points[3] = new Point(1,2);
+            case 0:     points[0] = new Point(5,1);
+                        points[1] = new Point(4,1);
+                        points[2] = new Point(6,1);
+                        points[3] = new Point(4,2);
                     break;
-            case 1:     points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(1,0);
-                        points[3] = new Point(2,2);
+            case 1:     points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(4,0);
+                        points[3] = new Point(5,2);
                     break;
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(3,0);
-                        points[2] = new Point(1,1);
-                        points[3] = new Point(3,1);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(6,0);
+                        points[2] = new Point(4,1);
+                        points[3] = new Point(6,1);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(3,2);
-                        points[3] = new Point(2,2);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(6,2);
+                        points[3] = new Point(5,2);
         }
         tetraminos.setPoints(points);
     }
 
     private void setOPoints() {
         Point[] points = new Point[4];
-        points[0] = new Point(2,1);
-        points[1] = new Point(2,2);
-        points[2] = new Point(1,1);
-        points[3] = new Point(1,2);
+        points[0] = new Point(5,1);
+        points[1] = new Point(5,2);
+        points[2] = new Point(4,1);
+        points[3] = new Point(4,2);
         tetraminos.setPoints(points);
     }
 
@@ -226,15 +226,15 @@ public class TetraminosControler {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
             case 0:
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(3,1);
-                        points[2] = new Point(2,2);
-                        points[3] = new Point(1,2);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(6,1);
+                        points[2] = new Point(5,2);
+                        points[3] = new Point(4,2);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(3,1);
-                        points[3] = new Point(3,2);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(6,1);
+                        points[3] = new Point(6,2);
         }
         tetraminos.setPoints(points);
     }
@@ -242,25 +242,25 @@ public class TetraminosControler {
     private void setTPoints() {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
-            case 0:     points[0] = new Point(2,1);
-                        points[1] = new Point(3,1);
-                        points[2] = new Point(1,1);
-                        points[3] = new Point(2,2);
+            case 0:     points[0] = new Point(5,1);
+                        points[1] = new Point(6,1);
+                        points[2] = new Point(4,1);
+                        points[3] = new Point(5,2);
                     break;
-            case 1:     points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(2,2);
-                        points[3] = new Point(3,1);
+            case 1:     points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(5,2);
+                        points[3] = new Point(6,1);
                     break;
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(1,1);
-                        points[2] = new Point(3,1);
-                        points[3] = new Point(2,0);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(4,1);
+                        points[2] = new Point(6,1);
+                        points[3] = new Point(5,0);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(2,0);
-                        points[2] = new Point(2,2);
-                        points[3] = new Point(1,1);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(5,0);
+                        points[2] = new Point(5,2);
+                        points[3] = new Point(4,1);
         }
         tetraminos.setPoints(points);
     }
@@ -269,15 +269,15 @@ public class TetraminosControler {
         Point[] points = new Point[4];
         switch (tetraminos.getRotation()) {
             case 0:
-            case 2:     points[0] = new Point(2,1);
-                        points[1] = new Point(1,1);
-                        points[2] = new Point(2,2);
-                        points[3] = new Point(3,2);
+            case 2:     points[0] = new Point(5,1);
+                        points[1] = new Point(4,1);
+                        points[2] = new Point(5,2);
+                        points[3] = new Point(6,2);
                     break;
-            default:    points[0] = new Point(2,1);
-                        points[1] = new Point(3,0);
-                        points[2] = new Point(3,1);
-                        points[3] = new Point(2,2);
+            default:    points[0] = new Point(5,1);
+                        points[1] = new Point(6,0);
+                        points[2] = new Point(6,1);
+                        points[3] = new Point(5,2);
         }
         tetraminos.setPoints(points);
     }

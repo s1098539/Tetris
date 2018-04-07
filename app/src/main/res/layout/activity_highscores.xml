@@ -17,7 +17,9 @@
         android:fontFamily="@font/ka1"
         android:text="@string/highscore_header_local"
         android:textColor="@color/text"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:paddingTop="15dp"
+        android:paddingLeft="30dp" />
 
     <TextView
         android:id="@+id/highscoreHeaderInfo"
@@ -28,7 +30,8 @@
         android:text="@string/highscore_header_local_info"
         android:textColor="@color/text"
         android:textSize="8sp"
-        android:layout_below="@id/highscoreHeader"/>
+        android:layout_below="@id/highscoreHeader"
+        android:paddingLeft="30dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

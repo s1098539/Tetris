@@ -61,6 +61,10 @@ public class HighscoresActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(hAdapter);
 
+        if (auth.getCurrentUser() == null) {
+            textHeaderInfo.setText(R.string.highscore_header_notloggedin_info);
+        }
+
         prepareLocalHighscoreData();
         prepareWorldHighscoreData();
 

@@ -3,12 +3,14 @@ package com.example.lion.tetris.activity.game;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.lion.tetris.R;
 import com.example.lion.tetris.controler.CurrentGameValuesController;
@@ -42,9 +44,11 @@ public class GameActivity extends AppCompatActivity {
     Point points;
     Settings settings;
     SettingsController settingsController;
-    Boolean running = true, moved = false, pause = false;
+    Button pauseButton, musicButton;
+    Boolean running = true, moved = false, pause = false, music = false;
     private float xStart, xCurrent, yStart, yEnd, deltaX, deltaY;
     static final int minSwipeDistance = 77;
+    MediaPlayer song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,8 @@ public class GameActivity extends AppCompatActivity {
         initialise();
         getLocalSettingsValues();
         setControllers();
+
+        song.setLooping(true);
 
         setContentView(R.layout.activity_game);
         gameLayout = findViewById(R.id.gameLayout);
@@ -64,6 +70,35 @@ public class GameActivity extends AppCompatActivity {
 
         tetraminosControler.newRandomTetraminos();
         rotating = false;
+
+        musicButton = (Button) findViewById(R.id.musicButton);
+        musicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (song.isPlaying()) {
+                    song.pause();
+                    musicButton.setBackgroundResource(R.drawable.sound_muted);
+                    music = false;
+                } else {
+                    song.start();
+                    musicButton.setBackgroundResource(R.drawable.sound_playing);
+                    music = true;
+                }
+            }
+        });
+
+        pauseButton = (Button) findViewById(R.id.playPauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pause) {
+                    unpause();
+                }
+                else {
+                    pause();
+                }
+            }
+        });
     }
 
     public void getLocalSettingsValues() {
@@ -89,6 +124,7 @@ public class GameActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         pause();
+        song.pause();
     }
 
     @Override
@@ -96,6 +132,7 @@ public class GameActivity extends AppCompatActivity {
         super.onResume();
         hideSystemBars();
         unpause();
+        if (music) song.start();
     }
 
     public void hideSystemBars() {
@@ -103,33 +140,34 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                xStart = event.getX();
-                yStart = event.getY();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                xCurrent = event.getX();
-                deltaX = xCurrent - xStart;
-                if (deltaX > minSwipeDistance || deltaX*-1 > minSwipeDistance) {
-                    xStart = xCurrent;
-                    moved = true;
-                    if (deltaX > 0) moveRight();
-                    else moveLeft();
-                    xStart = xCurrent;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                yEnd = event.getY();
-                deltaY = yEnd - yStart;
-                if (!moved) {
-                    if (deltaY > minSwipeDistance) slamDown();
-                    else rotate();
-                }
-                moved = false;
-                break;
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!pause) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    xStart = event.getX();
+                    yStart = event.getY();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    xCurrent = event.getX();
+                    deltaX = xCurrent - xStart;
+                    if (deltaX > minSwipeDistance || deltaX * -1 > minSwipeDistance) {
+                        xStart = xCurrent;
+                        moved = true;
+                        if (deltaX > 0) moveRight();
+                        else moveLeft();
+                        xStart = xCurrent;
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    yEnd = event.getY();
+                    deltaY = yEnd - yStart;
+                    if (!moved) {
+                        if (deltaY > minSwipeDistance) slamDown();
+                        else rotate();
+                    }
+                    moved = false;
+                    break;
+            }
         }
         return super.onTouchEvent(event);
     }
@@ -145,6 +183,7 @@ public class GameActivity extends AppCompatActivity {
         gameField = new GameField();
         currentGameValues = new CurrentGameValues();
         settingsController = new SettingsController();
+        song = MediaPlayer.create(GameActivity.this,R.raw.tetris_song);
     }
 
     private void setControllers() {
@@ -228,10 +267,13 @@ public class GameActivity extends AppCompatActivity {
 
     public void pause() {
         pause = true;
+        pauseButton.setBackgroundResource(R.drawable.start);
+        song.pause();
     }
 
     public void unpause() {
         pause = false;
+        pauseButton.setBackgroundResource(R.drawable.stop);
     }
 
     public void startDropDownThread() {
@@ -239,19 +281,19 @@ public class GameActivity extends AppCompatActivity {
             @Override public void run() {
                 Boolean moved = false;
                 while (running) {
-                    if (!pause) {
                         try {
                             Thread.sleep(currentGameValuesController.getGameSpeed());
-                            while (!moved) {
-                                if (!rotating) {
-                                    moveDown();
-                                    moved = true;
+                            if (!pause) {
+                                while (!moved) {
+                                    if (!rotating) {
+                                        moveDown();
+                                        moved = true;
+                                    }
                                 }
                             }
                             moved = false;
                         } catch (InterruptedException e) {
                         }
-                    }
                 }
             }
 

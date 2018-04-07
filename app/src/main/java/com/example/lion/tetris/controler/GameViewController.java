@@ -2,6 +2,7 @@ package com.example.lion.tetris.controler;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
@@ -22,23 +23,29 @@ public class GameViewController {
     Canvas canvas;
     GameView gameView;
     GameField gameField;
-    TextPaint textPaint;
+    TextPaint textPaintScore, textPaintLevel;
     CurrentGameValuesController currentGameValuesController;
     GameActivity gameActivity;
-    int pxLeft, pxRight, pxTop, pxBottom, blockSize;
+    int pxLeft, pxRight, pxTop, pxBottom, blockSize, blinkScore=6, blinkLevel=6;
+    String score="0", level="";
     Typeface typeface;
 
     public GameViewController() {
     }
 
     private void setTextPaint() {
-        if (textPaint == null) {
-            textPaint = new TextPaint();
-            textPaint.setTextSize(50);
-            textPaint.setColor(ContextCompat.getColor(gameActivity, R.color.text));
+        if (textPaintScore == null) {
+            textPaintScore = new TextPaint();
+            textPaintScore.setTextSize(50);
+            textPaintScore.setColor(ContextCompat.getColor(gameActivity, R.color.text));
             typeface = Typeface.createFromAsset(gameActivity.getAssets(), "font/ka1.ttf");
-            textPaint.setTypeface(typeface);
-            textPaint.setTextAlign(Paint.Align.LEFT);
+            textPaintScore.setTypeface(typeface);
+            textPaintScore.setTextAlign(Paint.Align.LEFT);
+            textPaintLevel = new TextPaint();
+            textPaintLevel.setTextSize(50);
+            textPaintLevel.setColor(ContextCompat.getColor(gameActivity, R.color.text));
+            textPaintLevel.setTypeface(typeface);
+            textPaintLevel.setTextAlign(Paint.Align.LEFT);
         }
     }
 
@@ -62,8 +69,24 @@ public class GameViewController {
     }
 
     public void draw(SurfaceHolder surfaceHolder) {
-        canvas = surfaceHolder.lockCanvas();
         setTextPaint();
+        if (!score.equals(currentGameValuesController.getScore())) {
+            blinkScore = 0;
+        }
+        if(blinkScore < 6) {
+            if(blinkScore%2 == 0) textPaintScore.setColor(ContextCompat.getColor(gameActivity, R.color.colorAccent));
+            else textPaintScore.setColor(ContextCompat.getColor(gameActivity, R.color.text));
+            blinkScore++;
+        }
+        if (!level.equals(currentGameValuesController.getLevel())) {
+            blinkLevel = 0;
+        }
+        if(blinkLevel < 6) {
+            if(blinkLevel%2 == 0) textPaintLevel.setColor(ContextCompat.getColor(gameActivity, R.color.colorAccent));
+            else textPaintLevel.setColor(ContextCompat.getColor(gameActivity, R.color.text));
+            blinkLevel++;
+        }
+        canvas = surfaceHolder.lockCanvas();
         if (canvas != null) {
             canvas.drawBitmap(gameView.background, 0, 0, null);
 
@@ -78,8 +101,11 @@ public class GameViewController {
                     }
                 }
             }
-            canvas.drawText(currentGameValuesController.getScore(), blockSize * 7, pxTop - blockSize * 0.1f , textPaint);
-            canvas.drawText(currentGameValuesController.getLevel(), blockSize * 2.1f, pxTop - blockSize * 0.1f, textPaint);
+
+            score = currentGameValuesController.getScore();
+            level = currentGameValuesController.getLevel();
+            canvas.drawText(score, blockSize * 7, pxTop - blockSize * 0.1f , textPaintScore);
+            canvas.drawText(level, blockSize * 2.1f, pxTop - blockSize * 0.1f, textPaintLevel);
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
 
