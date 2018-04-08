@@ -6,8 +6,8 @@ android {
         applicationId "com.example.lion.tetris"
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 108000
-        versionName "1.8.000"
+        versionCode 108001
+        versionName "1.8.001"
         testInstrumentationRunner "android.support.draw.runner.AndroidJUnitRunner"
     }
     buildTypes {

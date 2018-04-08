@@ -105,7 +105,7 @@ public class GameFieldControler {
         tetraminos.setRotation(rotation);
         int newX, newY;
         for (int i = 0; i<4; i++) {
-            newX = validationPoints[i].x+x;
+            newX = validationPoints[i].x+x-3;
             newY = validationPoints[i].y+y;
             if (newX > 9 || newX < 0 || newY > 19 || newY < 0) {
                 return false;

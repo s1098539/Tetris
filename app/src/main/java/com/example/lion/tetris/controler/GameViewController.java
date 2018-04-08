@@ -27,7 +27,7 @@ public class GameViewController {
     CurrentGameValuesController currentGameValuesController;
     GameActivity gameActivity;
     int pxLeft, pxRight, pxTop, pxBottom, blockSize, blinkScore=6, blinkLevel=6;
-    String score="0", level="";
+    String score="0", level="0";
     Typeface typeface;
 
     public GameViewController() {
