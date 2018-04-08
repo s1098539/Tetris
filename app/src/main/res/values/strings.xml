@@ -8,6 +8,7 @@
     <string name="menu_highscores">Highscores</string>
     <string name="menu_logout">logout</string>
     <string name="menu_login">login</string>
+    <string name="menu_toast_logout">You have been logged out</string>
     <string name="back_to_menu">Continue</string>
     <string name="submit_score">Submit</string>
     <string name="submit_name">Name</string>
